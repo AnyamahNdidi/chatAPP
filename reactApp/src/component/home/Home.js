@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React,{useState, useEffect} from 'react'
 import styled from "styled-components"
 import img from "./img/1.jpg"
 import pix from "./img/3.jpg"
@@ -20,6 +20,7 @@ function Home() {
     setToggle(!toggle)
   }
 
+  const navigate = useNavigate();
   // const uploadImage = (pics)=>{
   //   setPicLoading(true)
   //   if(pics.type === "image/jpeg" || "image/png" || "image/gif"){
@@ -103,11 +104,10 @@ function Home() {
   const submitLogin = handleSubmit(async(data)=>{
     console.log(data)
     const  {email, password } = data
-    
-    
     // await axios.post("http://localhost:2024/login", value)
 
   })
+ 
 
   
   return (

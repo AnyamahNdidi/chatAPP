@@ -9,7 +9,7 @@ const chatModel = mongoose.Schema({
     type:Boolean,
     default:false
   },
-  user:[
+  users:[
     { 
       type:mongoose.Schema.Types.ObjectId,
       ref:"User"
@@ -17,14 +17,14 @@ const chatModel = mongoose.Schema({
   ],
   latestMessage:{
     type:mongoose.Schema.Types.ObjectId,
-    ref:"User"
+    ref:"Message"
   },
   groupAdmn:{ 
     type:mongoose.Schema.Types.ObjectId,
     ref:"User"
   }
 },
-timestamps:true
+{timestamps:true}
 )
 
 module.exports = mongoose.model('Chat', chatModel)

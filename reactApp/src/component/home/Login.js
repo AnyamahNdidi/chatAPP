@@ -7,9 +7,12 @@ import {yupResolver} from "@hookform/resolvers/yup"
 import {useForm} from "react-hook-form"
 import axios from "axios"
 import {useNavigate} from "react-router-dom"
+import {useDispatch} from  "react-redux"
+import {getUserInfo} from "../globalState/reduxState"
 
 function Login() {
   const [userError, setUserError] = useState("")
+  const dispatch = useDispatch()
 
   const myNavigation = useNavigate()
 
@@ -31,6 +34,7 @@ function Login() {
     await axios.post("http://localhost:2024/login", data).then((data)=>{
       console.log(data)
       localStorage.setItem("user", JSON.stringify(data.data))
+      dispatch(getUserInfo(data.data))
       myNavigation("/chat")
 
     }).catch((error)=>{
