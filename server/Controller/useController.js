@@ -80,7 +80,25 @@ const LoginUser = async (req, res)=>{
   const {email, password} = req.body
 }
 
-module.exports = {
+
+// api for userSearch 
+const allusers = async(req, res)=>{
+    const keyword = req.query.search  ?
+    {
+      $or:[
+        {name : {$regex:req.query.search, $options:"i"}},
+        {email : {$regex:req.query.search, $options:'i'}},
+      ]
+    } : {}
+  // without token verification you use the comment one
+  // const user = await User.find(keyword)
+
+  const user = await User.find(keyword).find({ _id: { $ne: req.user._id } })
+  res.status(200).send(user)
+}
+
+module.exports = { 
   Register,
-  LoginUser
+  LoginUser,
+  allusers
 }
